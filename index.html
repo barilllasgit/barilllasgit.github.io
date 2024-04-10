@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,400,600,900">
+    <title>Pasapalabra</title>
+    <style>
+ .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.6; /* Opacidad del fondo */
+            z-index: -1; /* Colocar el fondo detrás de los elementos del juego */
+        }
+
+        .background1 {
+            background-image: url('/pasapalabra-master/img/onepiece.jpeg');
+        }
+        .background11 {
+            background-image: url('/pasapalabra-master/img/24.png');
+        }
+        .background12 {
+            background-image: url('/pasapalabra-master/img/3.png');
+        }
+        .background13 {
+            background-image: url('/pasapalabra-master/img/3.jpg');
+        }
+        .background14 {
+            background-image: url('/pasapalabra-master/img/4.webp');
+        }
+        .background15 {
+            background-image: url('/pasapalabra-master/img/onepieceold8.avif');
+        }
+        .background16 {
+            background-image: url('/pasapalabra-master/img/1.webp');
+        }
+        .background17 {
+            background-image: url('/pasapalabra-master/img/2.jpg');
+        }
+        .background18 {
+            background-image: url('/pasapalabra-master/img/2.png');
+        }
+        .background19 {
+            background-image: url('/pasapalabra-master/img/onepiece.jpeg');
+        }
+
+        .background2 {
+            background-image: url('/pasapalabra-master/img/onepieceop.jpg');
+        }
+		.background3 {
+            background-image: url('/pasapalabra-master/img/onepieceold.jpg');
+        }
+        .background4 {
+            background-image: url('/pasapalabra-master/img/onepieceold2.jpg');
+        }
+        .background5 {
+            background-image: url('/pasapalabra-master/img/onepieceold3.jpg');
+        }
+        .background6 {
+            background-image: url('/pasapalabra-master/img/onepieceold4.webp');
+        }
+        .background7 {
+            background-image: url('/pasapalabra-master/img/onepieceold5.jpg');
+        }
+        .background8 {
+            background-image: url('/pasapalabra-master/img/onepieceold6.jpg');
+        }
+        .background9 {
+            background-image: url('/pasapalabra-master/img/onepieceold7.avif');
+        }
+        .background10 {
+            background-image: url('/pasapalabra-master/img/onepieceold8.avif');
+        }
+
+        .item {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            font-size: 20px;
+            background-color: rgba(255, 255, 255, 0.5); /* Fondo semi-transparente */
+            border-radius: 50%; /* Forma circular */
+            margin: 5px; /* Espacio entre cada letra o imagen */
+            line-height: 30px; /* Alinear verticalmente el contenido */
+        }
+
+        .item .image {
+            display: inline-flex;
+            width: 100%;
+            height: 100%;
+            background-image: url('/pasapalabra-master/img/onepieceico2.png'); /* Ruta de tu imagen */
+            background-size:cover;
+			text-align: center;
+			
+        }
+
+		.title-container img {
+            width: 250px; /* Ancho deseado del GIF */
+            height: auto; /* Altura ajustada automáticamente */
+            display: block; /* Para centrar el elemento */
+			margin-left: 55px; /* Margen a la derecha para moverlo */
+			margin-top: 70px; /* Margen a la derecha para moverlo */
+
+		}
+        .controls-container {
+            background-color: rgba(65, 63, 63, 0.8); /* Fondo blanco semi-transparente */
+            border-radius: 90px; /* Bordes redondeados */
+			margin-top: 160px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra */
+			width: 450px;; /* Ancho ajustado automáticamente al contenido */
+    		height: 320px; /* Altura ajustada automáticamente al contenido */
+    		display: inline-block; /* Hacer que el contenedor se ajuste al contenido */ 
+		}
+		.button-container {
+            margin-top: 20px;
+        }
+
+        .custom-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+		body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Para evitar el desplazamiento vertical */
+        }
+		#background-select {
+            width: auto; /* Ajusta el ancho del desplegable según sea necesario */
+        }
+        #background-select option {
+            white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+            overflow: hidden; /* Oculta cualquier exceso de texto */
+            text-overflow: ellipsis; /* Muestra puntos suspensivos (...) si el texto es demasiado largo */
+		}
+		.resume-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+		.resume-button2 {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+			margin-right: 500px;
+        }
+		.color-picker-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+	opacity: 0.9;
+}
+
+.color-picker-container label {
+    margin-right: 10px;
+}
+
+.color-picker-container select {
+    margin-right: 10px;
+}
+
+.color-picker-container button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.color-picker-container button:hover {
+    background-color: #0056b3;
+}
+
+.color-picker-container input[type="range"] {
+    width: 150px;
+    margin-left: 10px;
+}
+#background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Aseguramos que el video esté detrás de los fondos estáticos */
+            display: none; /* Inicialmente oculto */
+        }
+		
+			</style>
+	<audio id="musica1" loop>
+		<source src="/pasapalabra-master/music/One Piece OST Overtaken.mp3" type="audio/mp3">
+		Tu navegador no soporta el elemento de audio.
+	  </audio>
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body onclick="PlayAudio()">
+	<video id="background-video" loop muted>
+        <source src="/pasapalabra-master/img/intro.mp4" type="video/mp4">
+        <!-- Agrega más etiquetas <source> según los formatos de video que desees admitir -->
+    </video>	<button id="stop-auto-background" class="resume-button">Fondos Automáticos (activado)</button>
+	
+	<div class="color-picker-container">
+		<input type="color" id="color-picker">
+		<label for="background-select">fondo</label>
+		<select id="background-select">
+			<option value="background1">1</option>
+			<option value="background2">2</option>
+			<option value="background3">3</option>
+			<option value="background4">4</option>
+			<option value="background5">5</option>
+			<option value="background6">6</option>
+			<option value="background7">7</option>
+			<option value="background8">8</option>
+			<option value="background9">9</option>
+			<option value="background10">10</option>
+			<option value="background11">11</option>
+			<option value="background12">12</option>
+			<option value="background13">13</option>
+			<option value="background14">14</option>
+			<option value="background15">15</option>
+			<option value="background16">16</option>
+			<option value="background17">17</option>
+			<option value="background18">18</option>
+	
+			<!-- Agrega más opciones aquí según tus imágenes de fondo -->
+		</select>
+		<input type="file" id="file-upload" accept="image/*">
+		<button onclick="removeUserImage()">Eliminar Imagen</button>
+		<label for="volume-control">Control de Volumen:</label>
+<input type="range" id="volume-control" min="0" max="1" step="0.1" value="1" onchange="adjustVolume(this.value)">
+<button id="toggle-video-button" class = resume-button2 onclick="toggleVideo()">Activar Video</button>
+	</div>
+	
+	<script>$(window).on('load', function() {
+		$('.background-container').fadeOut(0); // Ocultar todas las imágenes de fondo
+		$('.background1').fadeIn(1000); // Mostrar la imagen de fondo predeterminada
+	});</script>
+
+	<div class="background-container background1"></div>
+	<div class="background-container background3"></div>
+	<div class="background-container background4"></div>
+	<div class="background-container background5"></div>
+	<div class="background-container background6"></div>
+	<div class="background-container background7"></div>
+	<div class="background-container background8"></div>
+	<div class="background-container background9"></div>
+	<div class="background-container background10"></div>
+	<div class="background-container background11"></div>
+	<div class="background-container background12"></div>
+	<div class="background-container background13"></div>
+	<div class="background-container background14"></div>
+	<div class="background-container background15"></div>
+	<div class="background-container background16"></div>
+	<div class="background-container background17"></div>
+	<div class="background-container background18"></div>
+	
+    <div class="background-container background2" style="display: none;"></div>    <section class="game">
+        <div class="circle-container">
+            <div class="title-container">
+				<img src="/pasapalabra-master/img/onepiece5.gif" alt="Gertrudis GIF">            </div>
+            <ul class="circle">
+                <li class="item">A</li>
+                <li class="item">B</li>
+                <li class="item">C</li>
+                <li class="item">D</li>
+                <li class="item">E</li>
+                <li class="item">F</li>
+                <li class="item">G</li>
+                <li class="item">H</li>
+                <li class="item">I</li>
+                <li class="item">J</li>
+                <li class="item">L</li>
+                <li class="item">M</li>
+                <li class="item">N</li>
+                <li class="item"><span class="image"></span></li> <!-- Aquí va la imagen para la letra 'Ñ' -->
+                <li class="item">O</li>
+                <li class="item">P</li>
+                <li class="item">Q</li>
+                <li class="item">R</li>
+                <li class="item">S</li>
+                <li class="item">T</li>
+                <li class="item">U</li>
+                <li class="item">V</li>
+                <li class="item">X</li>
+                <li class="item">Y</li>
+                <li class="item">Z</li>
+            </ul>
+            <ul class="scoreboard">
+                <li id="js--timer" class="timer" href="">500</li>
+                <li id="js--score" class="score" href="">25</li>
+            </ul>
+			
+        </div>
+		
+        <div class="controls-container">
+            <i id="js--close" class="icon-close hidden"></i>
+            <div id="js--ng-controls" class="ng-controls">
+                <h4>BIENVENIDOS AL PASAPALABRA DE LOS JEFES</h4>
+                <p>Cuentas las leyendas, que habia un pasapalabra legendario cuyo contenido no pudo ser expuesto en television.</p>
+                <p>Hoy estamos aqui para acontecer esto, </p>
+				
+				<a id="js--new-game" class="btn"><i class="icon-play"></i>Jugar</a>
+            </div>
+			
+            <div id="js--question-controls" class="question-controls hidden">
+                <span id="js--hint" class="hint"></span>
+                <p id="js--definition" class="definition"></p>
+
+                <input id="js--user-answer" type="text" placeholder="Introduce tu respuesta">
+
+                <a id="js--send" class="btn btn--green" href="#">Enviar</a>
+                <a id="js--toggle-timer" class="btn" href="#">Pausar/Reanudar Tiempo</a> <!-- Botón de pausa/reanudación -->
+                <a id="js--pasapalabra" class="btn" href="#">Pasapalabra</a>
+            </div>
+            <div id="js--pa-controls" class="pa-controls hidden">
+                <p id="js--end-title" class="title"></p>
+                <p id="js--end-subtitle" class="subtitle"></p>
+                <a id="js--pa" class="btn" href=""><i class="icon-loop"></i>Jugar de nuevo</a>
+            </div>
+			
+        </div>
+    </section>
+	
+    <footer>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/app.js"></script>
+	<audio id="incorrect-sound">
+		<source src="/pasapalabra-master/music/mal.mp3" type="audio/mpeg">
+		Tu navegador no soporta el elemento de audio.
+	  </audio>
+	  <audio id="correct-sound">
+		<source src="/pasapalabra-master/music/bingo.mp3" type="audio/mpeg">
+		Tu navegador no soporta el elemento de audio.
+	  </audio>
+    <script>
+        var timerRunning = true;
+        var seconds = 0;
+        var intervalId;
+		var backgroundInterval;
+
+        document.getElementById("js--toggle-timer").addEventListener("click", function() {
+            if (timerRunning) {
+                clearInterval(intervalId);
+                timerRunning = false;
+                this.innerText = "Reanudar Tiempo";
+            } else {
+                intervalId = setInterval(updateTimer, 1000);
+                timerRunning = true;
+                this.innerText = "Pausar Tiempo";
+            }
+        });
+
+        function updateTimer() {
+            seconds++;
+            document.getElementById("js--timer").innerText = seconds;
+        }
+
+	function PlayAudio() {
+		document.getElementById("musica1").play();
+	}
+	$(document).ready(function() {
+    // Agregar evento hover al botón "Jugar"
+    $("#js--new-game").hover(
+        function() {
+            $(this).css("background-color", "red"); // Cambiar a rojo cuando el ratón está sobre el botón
+        },
+        function() {
+            $(this).css("background-color", ""); // Volver al color original cuando el ratón sale del botón
+        }
+    );
+});
+
+document.getElementById("color-picker").addEventListener("change", function() {
+    var color = this.value;
+    
+    // Cambiar el color de fondo de los botones
+    var buttons = document.querySelectorAll(".btn");
+    buttons.forEach(function(button) {
+        button.style.backgroundColor = color;
+    });
+    
+    // Cambiar el color de fondo de los elementos .scoreboard .timer y .score
+    var timerElements = document.querySelectorAll(".scoreboard .timer");
+    var scoreElements = document.querySelectorAll(".scoreboard .score");
+    var circleElements = document.querySelectorAll(".circle .item");
+    
+    // Iterar sobre los elementos y aplicar el nuevo color
+    timerElements.forEach(function(element) {
+        element.style.backgroundColor = color;
+    });
+
+    scoreElements.forEach(function(element) {
+        element.style.backgroundColor = color;
+    });
+
+	circleElements.forEach(function(element) {
+        element.style.backgroundColor = color;
+    });
+});   
+ // Función para cambiar el fondo de pantalla cuando se selecciona una opción del selector
+// Función para cambiar el fondo de pantalla cuando se selecciona una opción del selector
+document.getElementById("background-select").addEventListener("change", function() {
+    var selectedBackground = this.value;
+    var backgroundContainers = document.querySelectorAll(".background-container");
+    
+    backgroundContainers.forEach(function(container) {
+        container.style.display = "none"; // Oculta todos los contenedores de fondo
+    });
+    
+    document.querySelector("." + selectedBackground).style.display = "block"; // Muestra el contenedor seleccionado
+    clearInterval(backgroundInterval); // Detiene el cambio automático de fondo
+});		$(document).ready(function() {
+    var backgrounds = ['.background1', '.background2', '.background3', '.background4', '.background5', '.background6', '.background7', '.background8', '.background9', '.background10', '.background11', '.background12', '.background13', '.background14', '.background15', '.background16', '.background17', '.background18']; // Lista de clases de fondo
+    var currentBackground = 0; // Índice de la imagen de fondo actual
+    var backgroundInterval; // Variable para almacenar el ID del intervalo
+    var isAutoBackgroundActive = true; // Variable para controlar si el cambio automático de fondo está activo
+
+    // Función para cambiar el fondo automáticamente cada 5 segundos
+    function startBackgroundInterval() {
+        backgroundInterval = setInterval(function() {
+            $(backgrounds[currentBackground]).fadeIn(1000).siblings('.background-container').fadeOut(1000);
+            currentBackground = (currentBackground + 1) % backgrounds.length; // Avanzar al siguiente fondo
+        }, 5000); // Cambiar cada 5 segundos
+    }
+
+    // Función para detener el cambio automático de fondo
+    function stopBackgroundInterval() {
+        clearInterval(backgroundInterval);
+    }
+
+    // Función para controlar el cambio de estado del cambio automático de fondo
+    function toggleAutoBackground() {
+        if (isAutoBackgroundActive) {
+            stopBackgroundInterval(); // Detener el cambio automático de fondo
+            isAutoBackgroundActive = false; // Cambiar el estado a inactivo
+        } else {
+            startBackgroundInterval(); // Reanudar el cambio automático de fondo
+            isAutoBackgroundActive = true; // Cambiar el estado a activo
+        }
+    }
+
+    // Agregar un evento de clic al botón para detener/reanudar los fondos automáticos
+    $("#stop-auto-background").click(function() {
+        toggleAutoBackground(); // Detener/reanudar el cambio automático de fondos
+    });
+
+    // Comenzar el cambio automático de fondo al cargar la página
+    startBackgroundInterval();
+});
+var isAutoBackgroundEnabled = true;
+
+document.getElementById("stop-auto-background").addEventListener("click", function() {
+    if (isAutoBackgroundEnabled) {
+        clearInterval(backgroundInterval); // Detiene el cambio automático de fondos
+        isAutoBackgroundEnabled = false;
+        this.innerText = "Reanudar Fondos Automáticos (Desactivado)";
+    } else {
+        // Reanudar el cambio automático de fondos
+        backgroundInterval = setInterval(function() {
+            $(backgrounds[currentBackground]).fadeIn(1000).siblings('.background-container').fadeOut(1000);
+            currentBackground = (currentBackground + 1) % backgrounds.length;
+        }, 5000); // Cambiar cada 5 segundos
+
+        isAutoBackgroundEnabled = true;
+        this.innerText = "Reanudar Fondos Automáticos (Activado)";
+    }
+});
+document.getElementById("color-picker").addEventListener("change", function() {
+var color = this.value;
+var buttons = document.querySelectorAll(".btn");
+buttons.forEach(function(button) {
+button.style.backgroundColor = color;
+});
+});	
+// Obtiene el botón de detener fondos automáticos
+var stopAutoBackgroundButton = document.getElementById("stop-auto-background");
+
+$(document).ready(function() {
+            // Agrega un evento de clic al botón para detener los fondos automáticos
+            $("#stop-auto-background").click(function() {
+                clearInterval(backgroundInterval); // Detiene el cambio automático de fondos
+            });
+        });
+		document.getElementById('file-upload').addEventListener('change', function(event) {
+    var file = event.target.files[0]; // Obtener el archivo cargado
+
+    // Verificar si se seleccionó un archivo
+    if (file) {
+        var reader = new FileReader(); // Crear un objeto FileReader
+
+        // Configurar una función de devolución de llamada para cuando se complete la carga de la imagen
+        reader.onload = function(e) {
+            var imageUrl = e.target.result; // Obtener la URL de la imagen cargada
+
+            // Establecer la imagen cargada como fondo automáticamente
+            $('.background-container').css('background-image', 'url(' + imageUrl + ')');
+        };
+
+        // Leer el contenido del archivo como una URL de datos
+        reader.readAsDataURL(file);
+    }
+});
+function removeUserImage() {
+    $('.background-container').css('background-image', ''); // Eliminar la imagen cargada
+    // Restaurar el fondo predeterminado seleccionando la primera opción del desplegable
+    $('#background-select').val($('#background-select option:first').val()).change();
+}
+function adjustVolume(volume) {
+    var audio = document.getElementById("musica1");
+    audio.volume = volume;
+}
+  // Función toggleVideo actualizada
+  function toggleVideo() {
+            var video = document.getElementById("background-video");
+            var button = document.getElementById("toggle-video-button");
+            var backgroundContainers = document.querySelectorAll(".background-container");
+
+            if (video.style.display === "none" || video.style.display === "") {
+                video.style.display = "block";
+                video.play(); // Comenzar la reproducción del video
+                button.innerText = "Desactivar Video";
+                // Ocultar imágenes de fondo si el video está activado
+                backgroundContainers.forEach(function(container) {
+                    container.style.display = "none";
+                });
+            } else {
+                video.style.display = "none";
+                video.pause(); // Pausar la reproducción del video
+                button.innerText = "Activar Video";
+                // Mostrar imágenes de fondo si el video está desactivado
+                backgroundContainers.forEach(function(container) {
+                    container.style.display = "block";
+                });
+            }
+        }
+		function checkAnswer(pos) {
+    var userAnswer = $("#js--user-answer").val().toLowerCase();
+    var correctSound = document.getElementById("correct-sound");
+    var incorrectSound = document.getElementById("incorrect-sound"); // Obtener el elemento de audio para respuestas incorrectas
+
+    if (userAnswer == words[pos].word.toLowerCase()) {
+        words[pos].correct = true;
+        $(".circle .item").eq(words[pos].idNumber).addClass("item--success");
+        correctSound.play(); // Reproducir el sonido de respuesta correcta
+    } else {
+        words[pos].correct = false;
+        $(".circle .item").eq(words[pos].idNumber).addClass("item--failure");
+        incorrectSound.play(); // Reproducir el sonido de respuesta incorrecta
+    }
+    remainingWords--;
+    $("#js--score").html(remainingWords); // Corregí el selector aquí
+
+    return count++;
+}
+	</script>
+
+</body>
+</html>
